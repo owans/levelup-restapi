@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./config')();
 const { createServer } = require('http');
 const app = require('./app')();
 const port = config.PORT || 3001;
