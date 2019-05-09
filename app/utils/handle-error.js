@@ -1,4 +1,5 @@
 const { PermissionError } = require('./permission');
+const ModelNotFound = require('../../data/errors/notfound');
 /**
  * Handles HTTP error
  * @param {Error} error 
@@ -12,6 +13,8 @@ const handleHTTPError = (error, res) => {
     
     if (error instanceof PermissionError) {
         code = 403;
+    } else if (error instanceof ModelNotFound) {
+        code = 404;
     } else {
         code = 400
     }

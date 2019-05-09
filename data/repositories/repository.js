@@ -1,3 +1,5 @@
+const ModelNotFound = require('../errors/notfound');
+
 module.exports = class Repository {
     constructor(model) {
         this.model = model;
@@ -14,11 +16,23 @@ module.exports = class Repository {
      * @param {number} id 
      * @returns {Promise}
      */
-    getById(id) {
-        return this.model.query(function (qb) {
+    async getById(id) {
+       try {
+            const model = await this.model.query(function (qb) {
                 qb.where('id', id);
             })
-            .fetch();
+            .fetch({
+                require: true
+            });
+
+            return model;
+       } catch (error) {
+           if (error.message === 'EmptyResponse') {
+               throw new ModelNotFound('Resource not found!');
+           } else {
+               throw error;
+           }
+       }
     }
     /**
      * Create a new model
