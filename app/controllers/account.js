@@ -42,7 +42,7 @@ module.exports = {
 
     getContacts: async (req, res) => {
         try {
-            permissions.canAccess(req, res, req.params.id);
+            permissions.canAccess(req.userID, req.params.id);
             const contacts = await contactRepository.getUserContacts(req.params.id);
             res.json(contacts);
         } catch (error) {
