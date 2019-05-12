@@ -15,7 +15,10 @@ module.exports = {
             });
             
             const contact = await repository.create(attrs);
-            res.json(contact);
+            res.json({
+                contact,
+                patch: true
+            });
         } catch (error) {
             handleError(error, res);
         }
