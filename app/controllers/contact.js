@@ -23,16 +23,47 @@ module.exports = {
     /**
      * Read contact
      */
-    read: (req, res) => {
+    read: async (req, res) => {
+        try {
+            const query = await repository.getById(req.params.id);
+            const contact = query.toJSON();
+            permission.canAccess(req.userID, contact.user_id);
+            res.json(contact);
+        } catch (error) {
+            handleError(error, res);
+        }
     },
     /**
      * Update contact
      */
     update: (req, res) => {
+        try {
+            const attrs = req.body;
+
+            Object.assign(attrs, {
+                user_id: req.userID
+            });
+            
+            const contact = repository.update(attrs);
+            res.json(contact);
+        } catch (error) {
+            handleError(error, res);
+        }
     },
     /**
      * Delete contact
      */
     delete: (req, res) => {
+        try {
+            const attrs = req.body;
+
+            Object.assign(attrs, {
+                user_id: req.userID
+            });
+            
+            const contact = repository.del(attrs);
+        } catch (error) {
+            handleError(error, res);
+        }
     }
 }

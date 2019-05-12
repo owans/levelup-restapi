@@ -6,7 +6,7 @@ module.exports = {
         middle_name: joi.string().optional(),
         gender: joi.string().valid(['male', 'female']).optional(),
         organization: joi.string().optional(),
-        tite: joi.string().optional(),
+        title: joi.string().optional(),
         dob: joi.date().optional()
     }
 }

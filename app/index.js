@@ -1,6 +1,6 @@
 const express = require('express');
-const contactRouter = require('./routes/contacts');
-const accountRouter = require('./routes/accounts');
+const contactRouter = require('../app/routes/contact');
+const accountRouter = require('../app/routes/accounts');
 
 module.exports = () => {
     const app = express();

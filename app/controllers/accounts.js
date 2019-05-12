@@ -48,5 +48,25 @@ module.exports = {
         } catch (error) {
             handleError(error, res);
         }
+    },
+
+    updateContacts: async (req, res) =>{
+        try{
+            permissions.canAccess(req, res, req.params.id);
+            const updateContacts = await contactRepository.updateUserContacts(req.params.id);
+            res.json(contacts);
+        }catch(error){
+            handleError(error, res);
+        }
+    },
+
+    deleteContacts: async (req, res) =>{
+        try{
+            permissions.canAccess(req, res, req.params.id);
+            const deleteContacts = await contactRepository.deleteUserContacts(req.params.id);
+        }catch(error){
+            handleError(error, res);
+        }
     }
+
 }
