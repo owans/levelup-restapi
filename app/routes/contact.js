@@ -5,8 +5,8 @@ const controller = require('../controllers/contact');
 const schemas = require('../validation/contact');
 
 routes.post('/', auth(), validate(schemas.newContact), controller.create);
-routes.get('/:id', controller.read);
-routes.put('/:id', controller.update);
-routes.delete('/:id', controller.delete);
+routes.get('/:id', auth(), controller.read);
+routes.put('/:id', auth(), controller.update);
+routes.delete('/:id', auth(), controller.delete);
 
 module.exports = routes;

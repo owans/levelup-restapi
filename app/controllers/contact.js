@@ -36,7 +36,7 @@ module.exports = {
     /**
      * Update contact
      */
-    update: (req, res) => {
+    update: async (req, res) => {
         try {
             const attrs = req.body;
 
@@ -44,7 +44,7 @@ module.exports = {
                 user_id: req.userID
             });
             
-            const contact = repository.update(attrs);
+            const contact = await repository.update(attrs);
             res.json(contact);
         } catch (error) {
             handleError(error, res);
@@ -53,7 +53,7 @@ module.exports = {
     /**
      * Delete contact
      */
-    delete: (req, res) => {
+    delete: async (req, res) => {
         try {
             const attrs = req.body;
 
@@ -61,7 +61,7 @@ module.exports = {
                 user_id: req.userID
             });
             
-            const contact = repository.del(attrs);
+            const contact = await repository.del(attrs);
         } catch (error) {
             handleError(error, res);
         }
