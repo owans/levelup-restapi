@@ -1,6 +1,6 @@
 const handleError = require('../utils/handle-error');
 const JWT = require('../utils/jwt');
-const permissions = require('../utils/permission');
+// const permissions = require('../utils/permission');
 const UserRepository = require('../../data/repositories/user');
 const ContactRepository = require('../../data/repositories/contact');
 
@@ -42,7 +42,7 @@ module.exports = {
 
     getContacts: async (req, res) => {
         try {
-            permissions.canAccess(req, res, req.params.id);
+            // permissions.canAccess(req, res, req.params.id);
             const contacts = await contactRepository.getUserContacts(req.params.id);
             res.json(contacts);
         } catch (error) {
@@ -52,9 +52,9 @@ module.exports = {
 
     updateContacts: async (req, res) =>{
         try{
-            permissions.canAccess(req, res, req.params.id);
-            const updateContacts = await contactRepository.updateUserContacts(req.params.id);
-            res.json(contacts);
+            // permissions.canAccess(req, res, req.params.id);
+            const updateContacts = await contactRepository.update(req.params.id);
+            res.json(updateContacts);
         }catch(error){
             handleError(error, res);
         }
@@ -62,8 +62,12 @@ module.exports = {
 
     deleteContacts: async (req, res) =>{
         try{
-            permissions.canAccess(req, res, req.params.id);
-            const deleteContacts = await contactRepository.deleteUserContacts(req.params.id);
+            // permissions.canAccess(req, res, req.params.id);
+            const deleteContacts = await contactRepository.deleteUserContacts(req.body);
+            res.json({
+                status: "success",
+                message: "Contact deleted"
+            })
         }catch(error){
             handleError(error, res);
         }

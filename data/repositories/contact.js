@@ -12,16 +12,9 @@ module.exports = class ContactRepository extends Repository {
         }).fetchAll();
     }
 
-    updateUserContacts(id){
-        return this.model.query(function(qb){
-            qb.where("user_id", id)
-        }).update({user});
-    }
-
     deleteUserContacts(id){
         return this.model.query(function(qb){
             qb.where("user_id", id)
         }).del();
     }
-
 }
