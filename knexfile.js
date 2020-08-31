@@ -9,7 +9,7 @@ module.exports = {
       host: 'localhost',
       database: 'contact_db',
       user:     'administrator',
-      password: 'Owans94$'
+      password: ''
     },
     pool: {
       min: 2,
